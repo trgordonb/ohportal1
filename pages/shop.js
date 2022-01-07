@@ -2,7 +2,7 @@ import styles from '../styles/Layout.module.css'
 import { useTranslation } from 'react-i18next'
 import ProductBrowser from '../components/ProductBrowser'
 
-ShopPgae.getInitialProps = () => {
+ShopPage.getInitialProps = () => {
     const storeId = process.env.NEXT_PUBLIC_ECWID_STOREID
     return { 
         data: storeId 
