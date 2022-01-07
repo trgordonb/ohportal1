@@ -1,11 +1,7 @@
 const path = require('path')
 const NextI18Next = require('next-i18next').default
 
-const localePath =
-  typeof path.resolve === "function"
-    ? path.join(process.cwd(), `public/static/locales`) 
-    : "/locales";
-
+const localePath = "/locales";
 const NextI18NextInstance = new NextI18Next({
     defaultLanguage: 'zh',
     otherLanguages: ['en'],
