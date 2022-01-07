@@ -1,0 +1,45 @@
+
+.footer {
+  margin: 40px auto;
+  max-width: 1000px;
+  padding: 0 10px;
+}
+
+.footer div {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: #fff;
+  color: #333;
+  height: 80px;
+  padding: 0 30px;
+}
+
+.footer div p {
+  margin: 5px 5px;
+  min-width: 200px;
+  font-size: small;
+  text-decoration: none;
+}
+
+.icon {
+  margin: 5px 5px;
+}
+
+.link {
+  text-decoration: none;
+}
+
+@media (max-width: 768px) {
+  .footer div {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .footer div p {
+    margin: 20px 0;
+    flex-direction: column;
+    text-align: left;
+    font-size: small;
+  }
+}
