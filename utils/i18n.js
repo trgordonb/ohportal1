@@ -1,12 +1,9 @@
 const path = require('path')
 const NextI18Next = require('next-i18next').default
 
-const localePath = "/locales";
 const NextI18NextInstance = new NextI18Next({
     defaultLanguage: 'zh',
-    otherLanguages: ['en'],
-    localeSubpaths: {},
-    localePath,
+    otherLanguages: ['en']
 })
 
 const { appWithTranslation, withTranslation } = NextI18NextInstance

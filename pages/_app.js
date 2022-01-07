@@ -8,14 +8,12 @@ import NextNProgress from 'nextjs-progressbar';
 
 const AppComponent = ({ Component, pageProps, currentUser, footerData }) => {
   return (
-    <div>
       <AppStateProvider>
         <NextNProgress />
         <Header currentUser={currentUser} />
         <Component currentUser={currentUser} {...pageProps} />
         <Footer data={footerData} />
       </AppStateProvider>
-    </div>
   )
 }
 
