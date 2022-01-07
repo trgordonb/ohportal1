@@ -6,13 +6,16 @@ import Footer from '../components/Footer'
 import { appWithTranslation } from '../utils/i18n'
 import NextNProgress from 'nextjs-progressbar';
 
-const AppComponent = ({ Component, pageProps, currentUser, footerData }) => {
+const AppComponent = (ctx) => {
+  //{ Component, pageProps, currentUser, footerData }
+  console.log(ctx)
+  const Component = ctx.Component
   return (
       <AppStateProvider>
         <NextNProgress />
-        <Header currentUser={currentUser} />
-        <Component currentUser={currentUser} {...pageProps} />
-        <Footer data={footerData} />
+        <Header currentUser={ctx.currentUser} />
+        <Component currentUser={ctx.currentUser} {...ctx.pageProps} />
+        <Footer data={ctx.footerData} />
       </AppStateProvider>
   )
 }
