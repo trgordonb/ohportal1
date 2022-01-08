@@ -7,20 +7,20 @@ import useRequest from '../../hooks/use-request'
 import { useTranslation } from 'react-i18next'
 import { WidgetLoader, Widget } from 'react-cloudinary-upload-widget'
 
-DeviceRegPage.getInitialProps = () => {
+DeviceRegPage.getInitialProps = async (ctx) => {
   const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD
   const preset = process.env.NEXT_PUBLIC_CLOUDINARY_PRESET
-  return { 
-    cloudName,
-    preset 
-  }
+  return {
+      cloudName,
+      preset
+  };
 }
 
 export default function DeviceRegPage({ cloudName, preset }) {
   const [deviceId, setDeviceId] = useState('')
   const [fileUrl, setFileUrl] = useState('')
   const [fileName, setFileName] = useState('-')
-  const { t, i18n } = useTranslation()
+  const { t } = useTranslation()
 
   const { doRequest, errors } = useRequest({
     url: 'https://ohbiohealth.xyz/api/devices',

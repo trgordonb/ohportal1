@@ -11,7 +11,7 @@ import { useTranslation } from 'react-i18next'
 export default function SigninPage() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const { t, i18n } = useTranslation()
+  const { t } = useTranslation()
 
   const { doRequest, errors } = useRequest({
     url: 'https://ohbiohealth.xyz/api/users/signin',

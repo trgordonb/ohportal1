@@ -12,7 +12,7 @@ ApprovalPage.getInitialProps = async (appContext, client) => {
 }
 
 export default function ApprovalPage({ data }) {
-  const { t, i18n } = useTranslation()
+  const { t } = useTranslation()
 
   const { doRequest, errors } = useRequest({
     url: 'http://ohbiohealth.xyz/api/devices/proofs',

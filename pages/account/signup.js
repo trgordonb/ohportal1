@@ -12,7 +12,7 @@ export default function SignUpPage() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [passwordConfirm, setPasswordConfirm] = useState('')
-  const { t, i18n } = useTranslation()
+  const { t } = useTranslation()
 
   const { doRequest, errors } = useRequest({
       url: 'https://ohbiohealth.xyz/api/users/signup',

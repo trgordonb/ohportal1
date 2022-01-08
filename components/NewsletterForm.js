@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next'
 const NewsletterForm = ( { status, message, onValidated }) => {
   const [ error, setError ] = useState(null);
   const [ email, setEmail ] = useState(null);
-  const { t, i18n } = useTranslation()
+  const { t } = useTranslation()
 
   const handleFormSubmit = () => {
     setError(null);

@@ -3,19 +3,16 @@ import buildClient from '../api/build-client'
 import { AppStateProvider } from '../hooks/use-appstate'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
-import { appWithTranslation } from '../utils/i18n'
+import { appWithTranslation } from '../utils/i18n';
 import NextNProgress from 'nextjs-progressbar';
 
-const AppComponent = (ctx) => {
-  //{ Component, pageProps, currentUser, footerData }
-  console.log(ctx)
-  const Component = ctx.Component
+const AppComponent = ({ Component, pageProps, currentUser, footerData }) => {
   return (
       <AppStateProvider>
         <NextNProgress />
-        <Header currentUser={ctx.currentUser} />
-        <Component currentUser={ctx.currentUser} {...ctx.pageProps} />
-        <Footer data={ctx.footerData} />
+        <Header currentUser={currentUser} />
+        <Component currentUser={currentUser} {...pageProps} />
+        <Footer data={footerData} />
       </AppStateProvider>
   )
 }

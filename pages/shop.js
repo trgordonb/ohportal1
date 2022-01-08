@@ -2,15 +2,15 @@ import styles from '../styles/Layout.module.css'
 import { useTranslation } from 'react-i18next'
 import ProductBrowser from '../components/ProductBrowser'
 
-ShopPage.getInitialProps = () => {
+ShopPage.getInitialProps = async (ctx) => {
     const storeId = process.env.NEXT_PUBLIC_ECWID_STOREID
-    return { 
+    return {
         data: storeId 
     }
 }
 
 export default function ShopPage({ data, currentUser }) {
-    const { t, i18n } = useTranslation()
+    const { t } = useTranslation()
     
     return (
         <div className={styles.container}>

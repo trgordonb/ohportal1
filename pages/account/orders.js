@@ -1,13 +1,15 @@
 import styles from '../../styles/Form.module.css'
 import { useTranslation } from 'react-i18next'
 
-OrdersPage.getInitialProps = async (ctx, client, currentUser) => {
+OrdersPage.getInitialProps = async (context, client, currentUser) => {
   const res = await client.get(`/api/profiles/${currentUser.id}`)
-  return { data: res.data.orders }
+  return {
+      data: res.data.orders
+  }
 }
 
 export default function OrdersPage({ data }) {
-  const { t, i18n } = useTranslation()
+  const { t } = useTranslation()
 
   const lists = data.map((order) => { return (
     <li key={order._id}>

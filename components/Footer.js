@@ -7,13 +7,13 @@ import styles from '../styles/Footer.module.css'
 import GooglePlayIconEN from '../public/images/googleplaybadgeEN.png'
 import GooglePlayIconZH from '../public/images/googleplaybadgeZH.png'
 
-export default function Footer() {
-    const { t, i18n } = useTranslation()
-    const [GooglePlayIcon, setGooglePlayIcon] = useState(i18n.language === 'en' ? GooglePlayIconEN : GooglePlayIconZH)
+export default function Footer(props) {
+    const { t } = useTranslation()
+    const [GooglePlayIcon, setGooglePlayIcon] = useState(props.locale === 'en' ? GooglePlayIconEN : GooglePlayIconZH)
 
     useEffect(() => {
-        setGooglePlayIcon(i18n.language === 'en' ? GooglePlayIconEN : GooglePlayIconZH)
-    },[i18n.language])
+        setGooglePlayIcon(props.locale === 'en' ? GooglePlayIconEN : GooglePlayIconZH)
+    },[props.locale])
 
     return (   
         <footer className={styles.footer}>

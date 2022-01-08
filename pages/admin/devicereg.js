@@ -10,7 +10,7 @@ import { useTranslation } from 'react-i18next'
 export default function DeviceRegistrationPage() {
   const [deviceId, setDeviceId] = useState('')
   const [deviceType, setDeviceType] = useState('')
-  const { t, i18n } = useTranslation()
+  const { t } = useTranslation()
 
   const { doRequest, errors } = useRequest({
     url: 'https://ohbiohealth.xyz/api/devices',

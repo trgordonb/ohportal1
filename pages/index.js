@@ -4,8 +4,8 @@ import styles from '../styles/Layout.module.css'
 import 'react-toastify/dist/ReactToastify.css'
 import { ToastContainer, toast } from 'react-toastify'
 import CookieConsent from "react-cookie-consent";
-import { useTranslation } from 'react-i18next'
 import NewsletterSubscribe from '../components/NewsletterSubscribe'
+import { useTranslation } from 'react-i18next';
 
 HomePage.getInitialProps = async (ctx) => {
   const mailChimpUrl = process.env.NEXT_PUBLIC_MAILCHIMP_URL
@@ -19,45 +19,44 @@ HomePage.getInitialProps = async (ctx) => {
   })
   const dataEN = await resEN.json()
   const dataZH = await resZH.json()
-
-  return { 
+  return {
       data: {
-          link: mailChimpUrl,
-          storeId: storeId,
-          about: {
-            en: dataEN.filter(item=> item.type==='aboutus')[0].text,
-            zh: dataZH.filter(item=> item.type==='aboutus')[0].text
-          },
-          technology: {
-            en: dataEN.filter(item=> item.type==='technology')[0].text,
-            zh: dataZH.filter(item=> item.type==='technology')[0].text
-          },
-          BM: {
-            en: dataEN.filter(item=> item.type==='BMfunctions')[0].text,
-            zh: dataZH.filter(item=> item.type==='BMfunctions')[0].text
-          },
-          QM: {
-            en: dataEN.filter(item=> item.type==='QMfunctions')[0].text,
-            zh: dataZH.filter(item=> item.type==='QMfunctions')[0].text
-          },
-          BES: {
-            en: dataEN.filter(item=> item.type==='BESfunctions')[0].text,
-            zh: dataZH.filter(item=> item.type==='BESfunctions')[0].text
-          },
-          SEG: {
-            en: dataEN.filter(item=> item.type==='SEGfunctions')[0].text,
-            zh: dataZH.filter(item=> item.type==='SEGfunctions')[0].text
-          },
-          contact: {
-            en: dataEN.filter(item=> item.type==='contact')[0].text,
-            zh: dataZH.filter(item=> item.type==='contact')[0].text
-          }
+        link: mailChimpUrl,
+        storeId: storeId,
+        about: {
+          en: dataEN.filter(item=> item.type==='aboutus')[0].text,
+          zh: dataZH.filter(item=> item.type==='aboutus')[0].text
+        },
+        technology: {
+          en: dataEN.filter(item=> item.type==='technology')[0].text,
+          zh: dataZH.filter(item=> item.type==='technology')[0].text
+        },
+        BM: {
+          en: dataEN.filter(item=> item.type==='BMfunctions')[0].text,
+          zh: dataZH.filter(item=> item.type==='BMfunctions')[0].text
+        },
+        QM: {
+          en: dataEN.filter(item=> item.type==='QMfunctions')[0].text,
+          zh: dataZH.filter(item=> item.type==='QMfunctions')[0].text
+        },
+        BES: {
+          en: dataEN.filter(item=> item.type==='BESfunctions')[0].text,
+          zh: dataZH.filter(item=> item.type==='BESfunctions')[0].text
+        },
+        SEG: {
+          en: dataEN.filter(item=> item.type==='SEGfunctions')[0].text,
+          zh: dataZH.filter(item=> item.type==='SEGfunctions')[0].text
+        },
+        contact: {
+          en: dataEN.filter(item=> item.type==='contact')[0].text,
+          zh: dataZH.filter(item=> item.type==='contact')[0].text
+        }
       }
-  }
+    }
 }
 
 export default function HomePage({ currentUser, data }) {
-  const { t, i18n } = useTranslation()
+  const { t, i18n } = useTranslation();
   const [aboutContent, setAboutContent] = useState(data.about[i18n.language])
   const [technologyContent, setTechnologyContent] = useState(data.technology[i18n.language])
   const [BMContent, setBMContent] = useState(data.BM[i18n.language])
@@ -74,8 +73,6 @@ export default function HomePage({ currentUser, data }) {
     setBESContent(data.BES[i18n.language])
     setSEGContent(data.SEG[i18n.language])
     setContactContent(data.contact[i18n.language])
-    
-    
   },[i18n.language])
 
   const closeChatbot = () => {

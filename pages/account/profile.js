@@ -12,10 +12,10 @@ export default function ProfilePage({ currentUser }) {
     const [height, setHeight] = useState()
     const [dateOfBirth, setDateOfBirth] = useState()
     const [gender, setGender] = useState()
-    const { t, i18n } = useTranslation()
+    const { t } = useTranslation('common')
 
     const { doRequest, errors } = useRequest({
-        url: `https://ohbiohealth.xyz/api/profiles/${currentUser.id}`,
+        url: `https://ohbiohealth.xyz/api/profiles/${currentUser?.id}`,
         method: 'put',
         body: {
             weight,

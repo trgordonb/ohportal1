@@ -2,7 +2,7 @@ import styles from '@/styles/Hero.module.css'
 import { useTranslation } from 'react-i18next'
 
 export default function Hero() {
-  const { t, i18n } = useTranslation()
+  const { t } = useTranslation()
 
   return (
     <div className={styles.hero}>
