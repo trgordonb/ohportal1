@@ -17,15 +17,13 @@ export default function Footer(props) {
 
     return (   
         <footer className={styles.footer}>
-            <div>
-                <p>
-                    <Link href="https://www.youtube.com/channel/UCXjd7VSLVHL3R3GUZ_LqtQw"><FaYoutube size={25} className={styles.icon}/></Link>
-                    <Link href="https://www.instagram.com/ohbiohealth"><FaInstagram size={25} className={styles.icon}/></Link>
-                    <Link href="https://www.facebook.com/OnourHolistic"><FaFacebook size={25} className={styles.icon}/></Link>
-                    <Link href="https://play.google.com/store/apps/details?id=org.ohbiohealth.healthtracker"><Image src={GooglePlayIcon} width={100} height={40}/></Link>
-                </p>
+            <span>
+                <Link href="https://www.youtube.com/channel/UCXjd7VSLVHL3R3GUZ_LqtQw"><FaYoutube size={25} className={styles.icon}/></Link>
+                <Link href="https://www.instagram.com/ohbiohealth"><FaInstagram size={25} className={styles.icon}/></Link>
+                <Link href="https://www.facebook.com/OnourHolistic"><FaFacebook size={25} className={styles.icon}/></Link>
+                <Link href="https://play.google.com/store/apps/details?id=org.ohbiohealth.healthtracker"><Image src={GooglePlayIcon} width={100} height={40}/></Link>
                 <p>Copyright &copy; OH Biohealth 2022</p>
-            </div>
+            </span>
         </footer>
     )
 }

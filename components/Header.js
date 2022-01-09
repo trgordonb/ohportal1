@@ -42,8 +42,8 @@ export default function Header({ currentUser }) {
     const links = [
         { label: t('aboutus'), href: '/#about', sub: false, menuItems: '' },
         { label: t('technology'), href: '/#technology', sub: false, menuItems: '' },
-        { label: t('service'), href: '/#services', sub: false, menuItems: '' },
         { label: t('products'), href: '/#productsBM:/#productsQM:/#productsBES:/#productsSEG', sub:true, menuItems: 'BM:QM:BES:SEG' },
+        { label: t('service'), href: '/#services', sub: false, menuItems: '' },
         { label: t('shop'), href: '/shop', sub:false, menuItems: ''},
         { label: t('support'), href:'/#faq:/#contact', sub:true, menuItems: `${t('faq')}:${t('contact')}`},
         currentUser && currentUser.usertype === 'admin' && 

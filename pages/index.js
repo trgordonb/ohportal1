@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 import Hero from '../components/Hero'
+import { Section } from '../components/Section'
+import {VerticalFeatureRow } from '../components/VerticalFeatureRow'
 import styles from '../styles/Layout.module.css'
 import 'react-toastify/dist/ReactToastify.css'
 import { ToastContainer, toast } from 'react-toastify'
@@ -65,6 +67,8 @@ export default function HomePage({ currentUser, data }) {
   const [SEGContent, setSEGContent] = useState(data.SEG[i18n.language])
   const [contactContent, setContactContent] = useState(data.contact[i18n.language])
 
+  console.log(data.technology.en)
+
   useEffect(() => {
     setAboutContent(data.about[i18n.language])
     setTechnologyContent(data.technology[i18n.language])
@@ -87,46 +91,93 @@ export default function HomePage({ currentUser, data }) {
         buttonText={t('ok')}
       >{t('cookie')}
       </CookieConsent>  
-      <div id="about" className={styles.container}>
-          <h1>{t('aboutus')}</h1>
-          <p>{aboutContent}</p>
+      <Section
+        id="about"
+        title={t('aboutus')}
+        description={aboutContent}
+        large={true}
+      >
+        <div id="technology">
+          <VerticalFeatureRow
+            title={t('qtechnology')}
+            description={technologyContent}
+            image="/images/feature.svg"
+            imageAlt="First feature alt text"
+            imageOverride={true}
+          />  
+        </div> 
+        <div id="productsBM">  
+          <VerticalFeatureRow
+            title='BM'
+            description={BMContent}
+            image="/images/BM.png"
+            imageAlt="BM alt text"
+            reverse={true}
+          />   
+        </div>
+        <div id="productsQM">  
+          <VerticalFeatureRow
+            title='QM'
+            description={QMContent}
+            image="/images/QE.png"
+            imageAlt="QM alt text"
+          />   
+        </div>
+        <div id="productsBES">  
+          <VerticalFeatureRow
+            title='BES'
+            description={BESContent}
+            image="/images/BES.png"
+            imageAlt="BES alt text"
+            reverse={true}
+          />   
+        </div>
+        <div id="productsSEG">  
+          <VerticalFeatureRow
+            title='SEG'
+            description={SEGContent}
+            image="/images/SEG.png"
+            imageAlt="SEG alt text"
+          />   
+        </div>
+      </Section>
+      <div id="services" className='flex flex-wrap'>
+        <div className="w-full sm:w-1/2 mt-20 text-center sm:px-6">
+            <h3 className="text-3xl text-gray-900 font-semibold">{t('services')}</h3>
+            <div className='mt-20 flex flex-wrap'>
+              <div className="w-full sm:w-1/2 m-15">
+                <img className='mx-auto' src="https://cms.ohbiohealth.club/uploads/Onour_224eb9361d.png" width={200} height={200}/>
+              </div>
+              <div className="w-full sm:w-1/2 m-15">
+                <img className='mx-auto' src="https://cms.ohbiohealth.club/uploads/woopie_27f9b598d3.png" width={200} height={200}/>
+              </div>
+            </div> 
+        </div>
+        <div className="w-full sm:w-1/2 mt-20 text-center sm:px-6">
+            <h3 className="text-3xl text-gray-900 font-semibold">{t('partners')}</h3>
+            <div className='mt-20 flex flex-wrap'>
+              <div className="w-full sm:w-1/2 m-15">
+                <img className='mx-auto' src="https://cms.ohbiohealth.club/uploads/cyberport_d8cac9ac3f.png" width={200} height={200}/>
+              </div>
+              <div className="w-full sm:w-1/2 m-15">
+                <img className='mx-auto' src="https://cms.ohbiohealth.club/uploads/jade_16a737d4f2.png" width={200} height={200}/>
+              </div>
+            </div>
+        </div>
       </div>
-      <div id="technology" className={styles.container}>
-          <h1>{t('technology')}</h1>
-          <p>{technologyContent}</p>
+      <div id="faq">
+        <Section
+          title={t('faq')}
+          description=''
+        />
       </div>
-      <div id="services" className={styles.container}>
-            <h1>{t('services')}</h1>
-            <img src="https://cms.ohbiohealth.club/uploads/Onour_224eb9361d.png"/>
-            <img src="https://cms.ohbiohealth.club/uploads/woopie_27f9b598d3.png"/>
-            <h1>{t('partners')}</h1>
-            <img src="https://cms.ohbiohealth.club/uploads/cyberport_d8cac9ac3f.png"/>
-            <img src="https://cms.ohbiohealth.club/uploads/jade_16a737d4f2.png"/>
+      <div id="contact">
+        <Section
+          title={t('contact')}
+          description={contactContent}
+        />
       </div>
-      <div id="productsBM" className={styles.container}>
-          <h1>BM</h1>
-          <p>{BMContent}</p>
-      </div>
-      <div id="productsQM" className={styles.container}>
-          <h1>QM</h1>
-          <p>{QMContent}</p>     
-      </div>
-      <div id="productsBES" className={styles.container}>
-            <h1>BES</h1>
-            <p>{BESContent}</p>
-      </div>
-      <div id="productsSEG" className={styles.container}>
-            <h1>SEG</h1>
-            <p>{SEGContent}</p>
-      </div>
-      <div id="faq" className={styles.container}>
-            <h1>FAQ</h1>
-      </div>
-      <div id="contact" className={styles.container}>
-            <h1>{t('contact')}</h1>
-            <p>{contactContent}</p>
-      </div>
-      <div className={styles.container}> 
+      <div> 
         <NewsletterSubscribe mailChimpUrl={data.link} />
       </div>
     </div>

@@ -5,17 +5,18 @@
   padding: 0 10px;
 }
 
-.footer div {
+.footer span {
   display: flex;
   justify-content: space-around;
+  flex-direction: row;
   align-items: center;
   background: #fff;
   color: #333;
   height: 80px;
-  padding: 0 30px;
+  padding: 0 10px;
 }
 
-.footer div p {
+.footer span p {
   margin: 5px 5px;
   min-width: 200px;
   font-size: small;
@@ -31,12 +32,12 @@
 }
 
 @media (max-width: 768px) {
-  .footer div {
+  .footer span {
     flex-direction: column;
     height: auto;
   }
 
-  .footer div p {
+  .footer span p {
     margin: 20px 0;
     flex-direction: column;
     text-align: left;

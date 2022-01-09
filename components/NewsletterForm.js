@@ -44,7 +44,7 @@ const NewsletterForm = ( { status, message, onValidated }) => {
   return (
     <>
       <div className={styles.newsletter}>
-          <h2>{t('subscribe')}</h2>
+          <h3 className="text-2xl text-gray-900 font-semibold">{t('subscribe')}</h3>
             <div className={styles.formgroup}>
                 <input
                     onChange={(event) => setEmail(event?.target?.value ?? '')}

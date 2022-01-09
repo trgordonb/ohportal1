@@ -6,8 +6,8 @@ export default function Hero() {
 
   return (
     <div className={styles.hero}>
-      <h1>{t('welcome')}</h1>
-      <h2>{t('energy')}</h2>
+      <h1 className="text-3xl text-white font-semibold">{t('welcome')}</h1>
+      <h2 className="text-xl text-white font-semibold">{t('energy')}</h2>
     </div>
   )
 }
