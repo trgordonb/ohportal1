@@ -13,10 +13,10 @@ const Section = (props) => (
           <h2 className="text-4xl text-gray-900 font-bold">{props.title}</h2>
         )}
         {props.description && props.large && (
-          <ReactMarkdown className="mt-6 text-xl leading-9 whitespace-pre-wrap" children={props.description} escapeHtml={true} />
+          <ReactMarkdown className="mt-6 text-xl leading-9 whitespace-pre-wrap" children={props.description} />
         )}
         {props.description && !props.large && (
-          <ReactMarkdown className="mt-6 text-base leading-6 whitespace-pre-wrap" children={props.description} escapeHtml={true} />
+          <ReactMarkdown className="mt-6 text-base leading-6 whitespace-pre-wrap" children={props.description} />
         )}
       </div>
     )}

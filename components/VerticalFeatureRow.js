@@ -19,7 +19,7 @@ const VerticalFeatureRow = (props) => {
     <div className={verticalFeatureClass}>
       <div className="w-full sm:w-1/2 text-center sm:px-6">
         <h2 className="text-3xl text-gray-900 font-semibold">{props.title}</h2>
-        <ReactMarkdown className="mt-6 text-base leading-6 whitespace-pre-wrap list-disc" children={props.description} escapeHtml={true} />
+        <ReactMarkdown className="mt-6 text-base leading-6 whitespace-pre-wrap list-disc" children={props.description} />
       </div>
 
       <div className="w-full sm:w-1/2 p-6">
