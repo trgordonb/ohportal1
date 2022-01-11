@@ -1,4 +1,3 @@
-import styles from '../styles/Layout.module.css'
 import { useTranslation } from 'react-i18next'
 import ProductBrowser from '../components/ProductBrowser'
 
@@ -13,7 +12,7 @@ export default function ShopPage({ data, currentUser }) {
     const { t } = useTranslation()
     
     return (
-        <div className={styles.container}>
+        <div className='m-auto p-5 max-w-4xl'>
             {
                 <ProductBrowser
                     storeId={data}

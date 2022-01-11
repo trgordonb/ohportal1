@@ -1,14 +1,10 @@
-import { FaExclamationTriangle } from 'react-icons/fa'
 import Link from 'next/link'
-import styles from '../styles/404.module.css'
 
 export default function NotFoundPage() {
   return (
-      <div className={styles.error}>
-        <h1>
-          <FaExclamationTriangle /> 404
-        </h1>
-        <h4>Sorry, there is nothing here</h4>
+      <div className='m-auto text-center content-center'>
+        <h1 className='text-3xl font-bold'>404</h1>
+        <h4 className='text-xl'>Sorry, there is nothing here</h4>
         <Link href='/'>Go Back Home</Link>
       </div>
   )

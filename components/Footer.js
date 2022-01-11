@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import { Background } from './Background';
 import { CenteredFooter } from './CenteredFooter';
 import { Section } from './Section';
 import { useTranslation } from 'react-i18next';
@@ -7,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 export default function Footer(props) {
     const { t, i18n } = useTranslation();
     return (
-        <Background color="bg-gray-100">
+        <div className='bg-gray-100'>
             <Section>
                 <CenteredFooter
                     iconList={
@@ -50,7 +49,7 @@ export default function Footer(props) {
                     </li>
                 </CenteredFooter>
             </Section>
-        </Background>
+        </div>
     )
 
 }

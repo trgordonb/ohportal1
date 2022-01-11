@@ -1,4 +1,3 @@
-import styles from '../styles/Layout.module.css'
 import ReactMarkdown from 'react-markdown';
 
 PrivacyPage.getInitialProps = async (ctx) => {
@@ -15,7 +14,7 @@ PrivacyPage.getInitialProps = async (ctx) => {
 export default function PrivacyPage({ data }) {
 
     return (
-        <div className={styles.container}>
+        <div className="m-auto p-5 max-w-4xl">
             <h2 className="text-3xl text-gray-900 font-semibold">Privacy Policy</h2>
             <ReactMarkdown className="mt-6 text-ms leading-6 whitespace-pre-wrap" children={data} /> 
         </div>

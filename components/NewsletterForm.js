@@ -43,7 +43,7 @@ const NewsletterForm = ( { status, message, onValidated }) => {
 
   return (
     <>
-      <div className={styles.newsletter}>
+      <div className="max-w-xl p-8 mx-auto border">
           <h3 className="text-2xl text-gray-900 font-semibold">{t('subscribe')}</h3>
             <div className={styles.formgroup}>
                 <input

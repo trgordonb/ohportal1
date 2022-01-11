@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import Hero from '../components/Hero'
 import { Section } from '../components/Section'
 import {VerticalFeatureRow } from '../components/VerticalFeatureRow'
-import styles from '../styles/Layout.module.css'
 import 'react-toastify/dist/ReactToastify.css'
 import { ToastContainer, toast } from 'react-toastify'
 import CookieConsent from "react-cookie-consent";
@@ -178,7 +177,9 @@ export default function HomePage({ currentUser, data }) {
         />
       </div>
       <div> 
-        <NewsletterSubscribe mailChimpUrl={data.link} />
+        <Section>
+          <NewsletterSubscribe mailChimpUrl={data.link} />
+        </Section>
       </div>
     </div>
   )

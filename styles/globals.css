@@ -27,6 +27,10 @@ h1 {
     margin-bottom: 20px;
 }
 
+input {
+    background-color: #bbb;
+}
+
 .btn {
     display: inline-block;
     background: red;
