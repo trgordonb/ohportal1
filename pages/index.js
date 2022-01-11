@@ -51,6 +51,9 @@ HomePage.getInitialProps = async (ctx) => {
         contact: {
           en: dataEN.filter(item=> item.type==='contact')[0].text,
           zh: dataZH.filter(item=> item.type==='contact')[0].text
+        },
+        faq: {
+          en: dataEN.filter(item => item.type==='faq')[0].text
         }
       }
     }
@@ -65,8 +68,8 @@ export default function HomePage({ currentUser, data }) {
   const [BESContent, setBESContent] = useState(data.BES[i18n.language])
   const [SEGContent, setSEGContent] = useState(data.SEG[i18n.language])
   const [contactContent, setContactContent] = useState(data.contact[i18n.language])
-
-  console.log(data.technology.en)
+  const [faqContent, setFAQContent] = useState(data.faq.en)
+  
 
   useEffect(() => {
     setAboutContent(data.about[i18n.language])
@@ -167,7 +170,7 @@ export default function HomePage({ currentUser, data }) {
       <div id="faq">
         <Section
           title={t('faq')}
-          description=''
+          description={faqContent}
         />
       </div>
       <div id="contact">
