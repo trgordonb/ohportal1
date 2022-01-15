@@ -1,4 +1,3 @@
-import styles from '../../styles/Form.module.css'
 import { useTranslation } from 'react-i18next'
 
 OrdersPage.getInitialProps = async (context, client, currentUser) => {
@@ -23,9 +22,9 @@ export default function OrdersPage({ data }) {
   )})
 
   return (
-    <div>
-      <div className={styles.form}>
-        <h1>
+    <div className='py-16'>
+      <div className="w-full md:w-96 md:max-w-full mx-auto">
+        <h1 className='mt-10 mb-10 px-4 font-bold text-3xl'>
           {t('order')}
         </h1>
         <ul>

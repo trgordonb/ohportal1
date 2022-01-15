@@ -1,144 +1,122 @@
-import { useEffect, useState } from 'react'
-import Link from 'next/link'
+import { useState, useEffect } from "react"
 import Image from 'next/image'
-import styles from '../styles/Header.module.css'
+import DropDown from "./Dropdown"
+import DropDownResponsive from "./DropdownResponsive"
 import { useTranslation } from 'react-i18next'
 import { useAppState } from '../hooks/use-appstate'
 import { useRouter } from 'next/router'
 
 export default function Header({ currentUser }) {
-    const { t, i18n } = useTranslation()  
-    const [dismissBar, setDismissBar] = useState(false)
-    const { hasDismissedNotification, setHasDismissedNotification } = useAppState()
-    const router = useRouter()
-    
-    useEffect(() => {
-        if (!i18n.language) {
-            i18n.changeLanguage('zh');
-        }
-        let displayMessage = ''
-        if (currentUser && currentUser.usertype === 'client') {
-            if (!currentUser.hasProvidedInfo) {
-                displayMessage = t('basic')
-            } else if (currentUser.hasBoughtDevice && !currentUser.hasRegDevice && !currentUser.hasFinishedSurvey) {
-                displayMessage = t('buydevice')
-            } else if (currentUser.hasBoughtDevice && currentUser.hasRegDevice && !currentUser.hasFinishedSurvey) {
-                displayMessage = t('talkchatbot')
-            }
-        }
-        if (displayMessage === '' || hasDismissedNotification) {
-            setDismissBar(true)
-        } else {
-            setDismissBar(false)
-        }
-    }, [currentUser, i18n.languages]);
+  const { t, i18n } = useTranslation()  
+  const [isOpen, setIsOpen] = useState(false)
+  const [isSignIn, setIsSignIn] = useState(false)
+  const [dismissBar, setDismissBar] = useState(false)
+  const { hasDismissedNotification, setHasDismissedNotification } = useAppState()
+  const router = useRouter()
 
-    const onChangeLanguage = (language) => {
-        i18n.changeLanguage(language)
+  useEffect(() => {
+    if (currentUser) {
+      setIsSignIn(true)
+    } else {
+      setIsSignIn(false)
     }
+    let displayMessage = ''
+    if (currentUser && currentUser.usertype === 'client') {
+        if (!currentUser.hasProvidedInfo) {
+            displayMessage = t('basic')
+        } else if (currentUser.hasBoughtDevice && !currentUser.hasRegDevice && !currentUser.hasFinishedSurvey) {
+            displayMessage = t('buydevice')
+        } else if (currentUser.hasBoughtDevice && currentUser.hasRegDevice && !currentUser.hasFinishedSurvey) {
+            displayMessage = t('talkchatbot')
+        }
+    }
+    if (displayMessage === '' || hasDismissedNotification) {
+        setDismissBar(true)
+    } else {
+        setDismissBar(false)
+    }
+  },[currentUser])
 
-    const zip = rows => rows[0].map((_,c)=>rows.map(row=>row[c]))
-
-    const links = [
-        { label: t('aboutus'), href: '/#about', sub: false, menuItems: '' },
-        { label: t('technology'), href: '/#technology', sub: false, menuItems: '' },
-        { label: t('products'), href: '/#productsBM:/#productsQM:/#productsBES:/#productsSEG', sub:true, menuItems: 'BM:QM:BES:SEG' },
-        { label: t('service'), href: '/#services', sub: false, menuItems: '' },
-        { label: t('shop'), href: '/shop', sub:false, menuItems: ''},
-        { label: t('support'), href:'/#faq:/#contact', sub:true, menuItems: `${t('faq')}:${t('contact')}`},
-        currentUser && currentUser.usertype === 'admin' && 
-        { label: t('admin'), href: '/admin/devicereg:/admin/approve', sub: true, menuItems: `${t('adddevice')}:${t('approve')}` },
-        !currentUser && { label: t('account'), href: '/account/signin:/account/signup', sub: true, menuItems: `${t('signin')}:${t('register')}`},
-        currentUser && 
-        { label: t('account'), href: `/account/signout:/account/regdevice:/account/orders`, sub: true, menuItems: `${t('signout')}:${t('regdevice')}:${t('order')}`}
-    ]
-    .filter(linkConfig => linkConfig)
-    .map(({ label, href, sub, menuItems }) => {
-        if (sub) {
-            const sublinks = href.split(':')
-            const submenus = menuItems.split(':')
-            const menus = zip([sublinks, submenus])
-            return(
-                <li key={href} className={styles.dropdown}>
-                    <button className={styles.dropbtn}>
-                        {label}
-                        <i className={styles.fa}></i>
-                    </button>
-                    <div className={styles.dropdowncontent}>
+  return (
+      <header className="bg-indigo-400 sm:flex sm:justify-between sm:items-center sm:px-4 sm:py-3">
+        { !dismissBar &&
+            <div className="mb-0 p-2 text-white bg-gray-800 text-center">
+                <p>              
+                    <span>
                     {
-                        menus.map(([sublink, submenu]) => {
-                            return (
-                                <a className={styles.dropdown} key={sublink}>
-                                    <button className={styles.submenubtn} onClick={()=>router.replace(sublink)}>
-                                        {submenu}
-                                    </button>
-                                </a>
-                            )
-                        })
+                        currentUser && !currentUser.hasProvidedInfo && <>{t('basic')}</>
+                    }    
+                    {
+                        currentUser && currentUser.hasBoughtDevice && !currentUser.hasRegDevice && !currentUser.hasFinishedSurvey && <>{t('buydevice')}</>
+                    }  
+                    {
+                        currentUser && currentUser.hasBoughtDevice && currentUser.hasRegDevice && !currentUser.hasFinishedSurvey && <>{t('talkchatbot')}</>
                     }
-                    </div>
-                </li>
-            )} else {
-        return (
-          <li key={href} className={styles.dropdown}>
-            <button className={styles.dropbtn} onClick={()=>router.replace(href)}>
-                {label}
-            </button>
-          </li>
-        )}
-    })
-
-    return (
-        <header>      
-            {   !dismissBar &&
-                <div className={styles.alert}>
-                    <p>              
-                        <span>
-                        {
-                            currentUser && !currentUser.hasProvidedInfo && <>{t('basic')}</>
-                        }    
-                        {
-                            currentUser && currentUser.hasBoughtDevice && !currentUser.hasRegDevice && !currentUser.hasFinishedSurvey && <>{t('buydevice')}</>
-                        }  
-                        {
-                            currentUser && currentUser.hasBoughtDevice && currentUser.hasRegDevice && !currentUser.hasFinishedSurvey && <>{t('talkchatbot')}</>
-                        }
-                            <button 
-                                className={styles.closebutton} 
-                                onClick={() => {
-                                    setHasDismissedNotification(true)
-                                    setDismissBar(true)
-                                }} 
-                                type="button"
-                            >{t('dismiss')}
-                            </button>
-                        </span>
-                    </p>
-                </div>
-            }
-            <div className={styles.header}>
-                <div className={styles.logo}>
-                    <button style={{border:0}} onClick={() => {
-                        router.replace('/')
-                    }}>
-                        <Image src='/OHLogo.jpg' width={100} height={40}/>  
-                    </button>
-                </div>
-
-                <nav>
-                    <ul>
-                        {links}                 
-                        <li key={'english'}>
-                            <button className='btn-lang1' onClick={()=> onChangeLanguage('en')}>EN</button>
-                        </li>    
-                        <li key={'zh'}>
-                            <button className='btn-lang2' onClick={()=> onChangeLanguage('zh')}>繁</button>
-                        </li>
-                        
-                    </ul>
-                </nav>
+                        <button 
+                            className="ml-10" 
+                            onClick={() => {
+                                setHasDismissedNotification(true)
+                                setDismissBar(true)
+                            }} 
+                            type="button"
+                        >{t('dismiss')}
+                        </button>
+                    </span>
+                </p>
             </div>
-            
-        </header>  
-    )
+        }
+        <div className="flex items-center justify-between px-4 py-3 sm:p-0">
+          <div>
+            <button className="" onClick={() => {router.replace('/')}}>
+              <Image className="h-8" src="/OHLogo.jpg" alt="hello" width={100} height={40}/>
+            </button>
+          </div>
+          <div className="sm:hidden">
+            <button onClick={()=> setIsOpen(!isOpen)} type="button" className="block text-gray-500 hover:text-white hover:outline-none focus:text-white focus:outline-none">
+              { isOpen ?
+                <svg className="h-6 w-6 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <path fillRule="evenodd" clip-rule="evenodd" d="M18.278 16.864a1 1 0 0 1-1.414 1.414l-4.829-4.828-4.828 4.828a1 1 0 0 1-1.414-1.414l4.828-4.829-4.828-4.828a1 1 0 0 1 1.414-1.414l4.829 4.828 4.828-4.828a1 1 0 1 1 1.414 1.414l-4.828 4.829 4.828 4.828z"/>
+                </svg> :
+                <svg className="h-6 w-6 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <path fillRule="evenodd" d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"/>
+                </svg>
+              }
+            </button>
+          </div>
+        </div>
+        <nav className={`${isOpen ? 'block': 'hidden'} sm:block`}>
+          <div className="px-2 pt-2 pb-4 sm:flex sm:p-0">
+            <a className="block px-2 py-1 text-white font-semibold rounded hover:bg-gray-800" href='/#about'>{t('aboutus')}</a>
+            <a className="mt-1 block px-2 py-1 text-white font-semibold rounded hover:bg-gray-800 sm:mt-0 sm:ml-2" href='/#technology'>{t('technology')}</a>
+            <div className="hidden sm:block">
+              <DropDown title={t('products')} items={['BM','QM','BES','SEG']} short={false} links={['/#productsBM','/#productsQM','/#productsBES','/#productsSEG']}/>
+            </div>
+            <DropDownResponsive title={t('products')} items={['BM','QM','BES','SEG']} links={['/#productsBM','/#productsQM','/#productsBES','/#productsSEG']}/>
+            <a className="mt-1 block px-2 py-1 text-white font-semibold rounded hover:bg-gray-800 sm:mt-0 sm:ml-2" href='/#services'>{t('service')}</a>
+            <a className="mt-1 block px-2 py-1 text-white font-semibold rounded hover:bg-gray-800 sm:mt-0 sm:ml-2" href='/shop'>{t('shop')}</a>
+            <div className="hidden sm:block">
+              <DropDown title={t('support')} items={[t('faq'),t('contact')]} short={false} links={['/#faq','/#contact']}/>
+            </div>
+            <DropDownResponsive title={t('support')} items={[t('faq'),t('contact')]} links={['/#faq','/#contact']}/>
+            <div className="hidden sm:block">
+              <DropDown title={`${i18n.language === 'en' ? 'EN': '繁'}`} items={['EN','繁']} short={true} links={['#','#']} isLanguageMenu={true}/>
+            </div>
+            <DropDownResponsive title={`${i18n.language === 'en' ? 'EN': '繁'}`} items={['EN','繁']} links={['#','#']} isLanguageMenu={true}/>
+            <div className="hidden sm:block">
+              <DropDown 
+                title={t('account')}
+                items={isSignIn? [t('regdevice'), t('order'), t('signout')]: [t('signin'), t('register')]} 
+                short={false}
+                links={isSignIn? ['/account/regdevice','/account/orders','/account/signout']:['/account/signin','/account/signup']}
+              />
+            </div>
+            <DropDownResponsive 
+              title={t('account')} 
+              items={isSignIn? [t('regdevice'), t('order'), t('signout')]:[t('signin'), t('register')]}
+              links={isSignIn? ['/account/regdevice','/account/orders','/account/signout']:['/account/signin','/account/signup']}
+            />
+          </div>
+        </nav>
+      </header>
+  )
 }

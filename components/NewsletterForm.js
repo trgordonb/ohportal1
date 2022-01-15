@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { decode } from 'html-entities';
-import styles from '../styles/Newsletter.module.css'
 import { useTranslation } from 'react-i18next'
 
 const NewsletterForm = ( { status, message, onValidated }) => {
@@ -43,28 +42,35 @@ const NewsletterForm = ( { status, message, onValidated }) => {
 
   return (
     <>
-      <div className="max-w-xl p-8 mx-auto border">
-          <h3 className="text-2xl text-gray-900 font-semibold">{t('subscribe')}</h3>
-            <div className={styles.formgroup}>
-                <input
-                    onChange={(event) => setEmail(event?.target?.value ?? '')}
-                    type="email"
-                    placeholder={t('youremail')}
-                    onKeyUp={(event) => handleInputKeyEvent(event)}
-                />
-                <button className={styles.subscribeBtn} onClick={handleFormSubmit}>
-                    {t('submit')}
-                </button>
-            </div>
-            <div className={styles.message}>
-                {status === "sending" && <div>{t('sending')}</div>}
-                {status === "error" || error ? (
-                    <div dangerouslySetInnerHTML={{ __html: error || getMessage( message ) }}/>) : null }
-                {status === "success" && status !== "error" && !error && (
-                    <div>{t('thanksubscribe')}</div>
-                )}
-            </div>
+      <div className="w-full md:w-96 md:max-w-full mx-auto bg-indigo-300 rounded-lg shadow-lg">
+        <div className="p-6 border border-gray-300 sm:rounded-md">
+          <label className="block mb-6">
+            <span className="text-gray-700 text-xl font-bold">
+              {t('subscribe')}
+            </span>
+            <input
+              className="block px-2 py-2 w-full mt-1 border-gray-500 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+              onChange={(event) => setEmail(event?.target?.value ?? '')}
+              type="email"
+              placeholder={t('youremail')}
+              onKeyUp={(event) => handleInputKeyEvent(event)}
+            />
+          </label>
+          <div className="mb-6">
+            <button className="h-10 px-5 text-indigo-100 bg-indigo-700 rounded-lg transition-colors duration-150 focus:shadow-outline hover:bg-indigo-800" onClick={handleFormSubmit}>
+              {t('submit')}
+            </button>
+          </div>
+          <div className="mb-6">
+              {status === "sending" && <div>{t('sending')}</div>}
+              {status === "error" || error ? (
+                  <div dangerouslySetInnerHTML={{ __html: error || getMessage( message ) }}/>) : null }
+              {status === "success" && status !== "error" && !error && (
+                  <div>{t('thanksubscribe')}</div>
+              )}
+          </div>
         </div>
+      </div>
     </>
   );
 }

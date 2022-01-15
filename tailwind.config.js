@@ -1,7 +1,7 @@
 const defaultTheme = require('tailwindcss/defaultTheme')
 
 module.exports = {
-  purge: ['./**/*.{js,ts,jsx,tsx}'],
+  content: ['./pages/**/*.{js,ts,jsx,tsx}','./components/**/*.{js,ts,jsx,tsx}'],
   theme: {
     fontSize: {
       xs: '0.75rem',
@@ -46,8 +46,11 @@ module.exports = {
       lineHeight: {
         hero: '4.5rem',
       },
+      backgroundImage: {
+        'hero-pattern': "url('/images/heroimage.jpg')"
+      }
     },
   },
   variants: {},
-  plugins: [],
+  plugins: [require('@tailwindcss/forms')],
 };

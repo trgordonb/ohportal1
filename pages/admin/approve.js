@@ -1,8 +1,6 @@
-import { FaRocket } from 'react-icons/fa';
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-import { useState, useEffect } from 'react'
-import styles from '../../styles/Form.module.css'
+import { useEffect } from 'react'
 import useRequest from '../../hooks/use-request'
 import { useTranslation } from 'react-i18next'
 
@@ -50,15 +48,14 @@ export default function ApprovalPage({ data }) {
 
   return (
     <div>
-      <div className={styles.form}>
+      <div className="w-full md:w-96 md:max-w-full mx-auto">
         <ToastContainer />
-        <h1>
-          <FaRocket /> {t('regdevice')}
+        <h1 className='mt-10 font-bold text-xl'>
+          {t('regdevice')}
         </h1>
         <ul>
           {lists}
         </ul>
-        <ToastContainer />
       </div>
     </div>
   )
