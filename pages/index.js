@@ -147,22 +147,22 @@ export default function HomePage({ currentUser, data }) {
         <div className="w-full sm:w-1/2 mt-20 text-center sm:px-6">
             <h3 className="text-3xl text-gray-900 font-semibold">{t('services')}</h3>
             <div className='mt-20 flex flex-wrap'>
-              <div className="w-full sm:w-1/2 m-15">
-                <img className='mx-auto' src="https://cms.ohbiohealth.club/uploads/Onour_224eb9361d.png" width={200} height={200}/>
+              <div className="w-full sm:w-1/2 m-15 mx-auto my-auto">
+                <img className='mx-auto my-auto' src="https://cms.ohbiohealth.club/uploads/Onour_224eb9361d.png" width={200} height={200}/>
               </div>
-              <div className="w-full sm:w-1/2 m-15">
-                <img className='mx-auto' src="https://cms.ohbiohealth.club/uploads/woopie_27f9b598d3.png" width={200} height={200}/>
+              <div className="w-full sm:w-1/2 m-15 mx-auto my-auto">
+                <img className='mx-auto my-auto' src="https://cms.ohbiohealth.club/uploads/woopie_27f9b598d3.png" width={200} height={200}/>
               </div>
             </div> 
         </div>
         <div className="w-full sm:w-1/2 mt-20 text-center sm:px-6">
             <h3 className="text-3xl text-gray-900 font-semibold">{t('partners')}</h3>
             <div className='mt-20 flex flex-wrap'>
-              <div className="w-full sm:w-1/2 m-15">
-                <img className='mx-auto' src="https://cms.ohbiohealth.club/uploads/cyberport_d8cac9ac3f.png" width={200} height={200}/>
+              <div className="w-full sm:w-1/2 m-15 mx-auto my-auto">
+                <img className='mx-auto my-auto' src="https://cms.ohbiohealth.club/uploads/cyberport_d8cac9ac3f.png" width={200} height={200}/>
               </div>
-              <div className="w-full sm:w-1/2 m-15">
-                <img className='mx-auto' src="https://cms.ohbiohealth.club/uploads/jade_16a737d4f2.png" width={200} height={200}/>
+              <div className="w-full sm:w-1/2 m-15 mx-auto my-auto">
+                <img className='mx-auto my-auto' src="https://cms.ohbiohealth.club/uploads/jade_16a737d4f2.png" width={200} height={200}/>
               </div>
             </div>
         </div>

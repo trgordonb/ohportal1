@@ -38,7 +38,7 @@ export default function Header({ currentUser }) {
   },[currentUser])
 
   return (
-      <header className="bg-indigo-400 sm:flex sm:justify-between sm:items-center sm:px-4 sm:py-3">
+      <header className="bg-gradient-to-r from-indigo-500 to-cyan-500 sm:flex sm:justify-between sm:items-center sm:px-4 sm:py-3">
         { !dismissBar &&
             <div className="mb-0 p-2 text-white bg-gray-800 text-center">
                 <p>              
