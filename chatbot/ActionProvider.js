@@ -23,10 +23,18 @@ class ActionProvider {
             messages: [...state.messages, message]
           })
         )}
-        
+    }
+
+    setClientMessage = (message) => {
+      this.setState((state) => ({
+        ...state,
+        messages: [...state.messages, message]
+      }))
     }
     
     handleYes = () => {
+      const reply = this.createClientMessage(this.stateRef.t('y'))
+      this.setClientMessage(reply)
       if (this.stateRef.step === 1) {
         const message = this.createChatbotMessage(this.stateRef.t('q2'), { withAvatar: false, delay: 500, widget: "yesno" });
         this.setChatbotMessage(message, { muscleache: true });
@@ -43,6 +51,8 @@ class ActionProvider {
     }
 
     handleNo = () => {
+      const reply = this.createClientMessage(this.stateRef.t('n'))
+      this.setClientMessage(reply)
       if (this.stateRef.step === 1) {
         const message = this.createChatbotMessage(this.stateRef.t('q2'), { withAvatar: false, delay: 500, widget: "yesno" });
         this.setChatbotMessage(message, { muscleache: false });
