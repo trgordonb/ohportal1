@@ -25,8 +25,8 @@ const VerticalFeatureRow = (props) => {
       <div className="w-full sm:w-1/2 p-6">
         {
           props.imageOverride ?
-          <img className='mx-auto p-4' src={`${router.basePath}${props.image}`} alt={props.imageAlt}/>:
-          <img className='mx-auto p-4' src={`${router.basePath}${props.image}`} alt={props.imageAlt} width={300} height={300}/>
+          <img className='mx-auto object-center p-4' src={`${router.basePath}${props.image}`} alt={props.imageAlt}/>:
+          <img className='mx-auto object-center p-4' src={`${router.basePath}${props.image}`} alt={props.imageAlt} width={300} height={300}/>
         }
       </div>
     </div>

@@ -5,6 +5,12 @@ import { VerticalFeatureRow } from '../components/VerticalFeatureRow'
 import 'react-toastify/dist/ReactToastify.css'
 import { ToastContainer, toast } from 'react-toastify'
 import CookieConsent from "react-cookie-consent";
+import Popup from 'reactjs-popup'
+import config from '../chatbot/config'
+import MessageParser from '../chatbot/MessageParser'
+import ActionProvider from '../chatbot/ActionProvider'
+import Chatbot from 'react-chatbot-kit'
+import { createChatBotMessage } from 'react-chatbot-kit';
 import NewsletterSubscribe from '../components/NewsletterSubscribe'
 import { useTranslation } from 'react-i18next';
 
@@ -61,6 +67,7 @@ HomePage.getInitialProps = async () => {
 
 export default function HomePage({ data }) {
   const { t, i18n } = useTranslation();
+  const [showChatBot, setShowChatBot] = useState(true)
   const [aboutContent, setAboutContent] = useState(data.about[i18n.language])
   const [technologyContent, setTechnologyContent] = useState(data.technology[i18n.language])
   const [BMContent, setBMContent] = useState(data.BM[i18n.language])
@@ -79,6 +86,14 @@ export default function HomePage({ data }) {
     setBESContent(data.BES[i18n.language])
     setSEGContent(data.SEG[i18n.language])
     setContactContent(data.contact[i18n.language])
+
+    config = {...config,
+      state : {
+        ...config.state,
+        language: i18n.language,
+        t: t
+      }
+    } 
   },[i18n.language])
 
   const closeChatbot = () => {
@@ -108,6 +123,9 @@ export default function HomePage({ data }) {
             imageOverride={true}
           />  
         </div> 
+        <div className='flex items-center'>
+          <h1 className='text-gray-800 text-4xl mx-auto mt-20 font-bold'>{t('products')}</h1>
+        </div>
         <div id="productsBM">  
           <VerticalFeatureRow
             title='BM'
@@ -143,6 +161,61 @@ export default function HomePage({ data }) {
           />   
         </div>
       </Section>
+      <div id="chatbot" className='items-center text-center'>
+        {
+          showChatBot &&
+          <Popup
+            position={'center top'}
+            trigger={open => (
+            <button>
+              <div className="bg-gradient-to-r from-cyan-500 via-indigo-300 to-indigo-500 rounded-lg shadow-lg">
+                <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 lg:flex lg:items-center lg:justify-between">
+                  <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl px-6">
+                    <span className="block text-gray-700">{t('pain1')}</span>
+                  </h2>
+                  <div className="mt-8 flex lg:mt-0 lg:flex-shrink-0">
+                    <div className="inline-flex rounded-md shadow">
+                      <a
+                        href="/#chatbot"
+                        className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-bold rounded-md text-white bg-gray-700 hover:bg-indigo-700"
+                      >
+                        Get started
+                      </a>
+                    <div className="ml-3 inline-flex rounded-md shadow">
+                      <a
+                        href="/#chatbot"
+                        className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-bold rounded-md text-indigo-600 bg-white hover:bg-indigo-50"
+                      >
+                        Learn more
+                      </a>
+                    </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </button>
+            )}
+            closeOnDocumentClick
+          >
+            <Chatbot
+              config={{
+                ...config, 
+                initialMessages: [
+                  createChatBotMessage(t('surveyintro')),
+                  createChatBotMessage(t('q1'), {
+                      withAvatar: false,
+                      delay: 500,
+                      widget: "yesno"
+                  })
+                ]
+              }}
+              messageParser={MessageParser}
+              actionProvider={ActionProvider}
+              placeholderText={t('enterresponse')}
+            />
+          </Popup>
+        }
+      </div>
       <div id="services" className='flex flex-wrap'>
         <div className="w-full sm:w-1/2 mt-20 text-center sm:px-6">
             <h3 className="text-3xl text-gray-900 font-semibold">{t('services')}</h3>

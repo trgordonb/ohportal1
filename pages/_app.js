@@ -1,4 +1,6 @@
 import '../styles/globals.css'
+import 'react-chatbot-kit/build/main.css'
+import '../styles/chatbot.css'
 import { AppStateProvider } from '../hooks/use-appstate'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
