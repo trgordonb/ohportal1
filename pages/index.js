@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react'
 import Hero from '../components/Hero'
 import { Section } from '../components/Section'
-import {VerticalFeatureRow } from '../components/VerticalFeatureRow'
+import { VerticalFeatureRow } from '../components/VerticalFeatureRow'
 import 'react-toastify/dist/ReactToastify.css'
 import { ToastContainer, toast } from 'react-toastify'
 import CookieConsent from "react-cookie-consent";
 import NewsletterSubscribe from '../components/NewsletterSubscribe'
 import { useTranslation } from 'react-i18next';
 
-HomePage.getInitialProps = async (ctx) => {
+HomePage.getInitialProps = async () => {
   const mailChimpUrl = process.env.NEXT_PUBLIC_MAILCHIMP_URL
   const storeId = process.env.NEXT_PUBLIC_ECWID_STOREID
   const options = {headers: new Headers({'Content-Type': 'application/json'})}
@@ -59,7 +59,7 @@ HomePage.getInitialProps = async (ctx) => {
     }
 }
 
-export default function HomePage({ currentUser, data }) {
+export default function HomePage({ data }) {
   const { t, i18n } = useTranslation();
   const [aboutContent, setAboutContent] = useState(data.about[i18n.language])
   const [technologyContent, setTechnologyContent] = useState(data.technology[i18n.language])

@@ -5,12 +5,14 @@ import Router from 'next/router'
 import Link from 'next/link'
 import useRequest from '../../hooks/use-request'
 import { useTranslation } from 'react-i18next'
+import { useAppState } from '../../hooks/use-appstate'
 
 export default function SignUpPage() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [passwordConfirm, setPasswordConfirm] = useState('')
   const { t } = useTranslation()
+  const { setCurrentUser } = useAppState()
 
   const { doRequest, errors } = useRequest({
       url: 'https://ohbiohealth.xyz/api/users/signup',
@@ -33,7 +35,17 @@ export default function SignUpPage() {
       return
     }
 
-    doRequest()
+    //doRequest()
+    setCurrentUser({
+      usertype: 'client',
+      email,
+      id: '61d46e7e59e8f3a982c174b1',
+      hasProvidedInfo: false,
+      hasFinishedSurvey: false,
+      hasBoughtDevice: false,
+      hasRegDevice: false
+    })
+    Router.push('/account/profile')
   }
 
   useEffect(() => {

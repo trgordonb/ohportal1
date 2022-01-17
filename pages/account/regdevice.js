@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import useRequest from '../../hooks/use-request'
 import { useTranslation } from 'react-i18next'
 import { WidgetLoader, Widget } from 'react-cloudinary-upload-widget'
+import { useAppState } from '../../hooks/use-appstate'
 
 DeviceRegPage.getInitialProps = async (ctx) => {
   const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD
@@ -19,6 +20,7 @@ export default function DeviceRegPage({ cloudName, preset }) {
   const [fileUrl, setFileUrl] = useState('')
   const [fileName, setFileName] = useState('-')
   const { t } = useTranslation()
+  const { currentUser ,setCurrentUser } = useAppState()
 
   const { doRequest, errors } = useRequest({
     url: 'https://ohbiohealth.xyz/api/devices',
@@ -38,13 +40,28 @@ export default function DeviceRegPage({ cloudName, preset }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    doRequest()
+    //doRequest()
+    setCurrentUser({
+      ...currentUser,
+      hasRegDevice: true
+    })
+    toast.info('Device sucessfully registered')
+    setDeviceId('')
   }
 
   useEffect(() => {
     if (errors) {
       toast.error(errors)
     }
+    setCurrentUser({
+      usertype: 'client',
+      email: 'trgordonb@icloud.com',
+      id: '61d46e7e59e8f3a982c174b1',
+      hasProvidedInfo: true,
+      hasFinishedSurvey: false,
+      hasBoughtDevice: true,
+      hasRegDevice: false
+    })
   },[errors])
 
   return (

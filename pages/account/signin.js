@@ -5,10 +5,12 @@ import Link from 'next/link'
 import Router from 'next/router';
 import useRequest from '../../hooks/use-request';
 import { useTranslation } from 'react-i18next'
+import { useAppState } from '../../hooks/use-appstate'
 
 export default function SigninPage() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const { setCurrentUser } = useAppState()
   const { t } = useTranslation()
 
   const { doRequest, errors } = useRequest({
@@ -31,7 +33,17 @@ export default function SigninPage() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     
-    await doRequest()
+    //await doRequest()
+    setCurrentUser({
+      usertype: 'client',
+      email,
+      id: '61d46e7e59e8f3a982c174b1',
+      hasProvidedInfo: true,
+      hasFinishedSurvey: false,
+      hasBoughtDevice: true,
+      hasRegDevice: false
+    })
+    Router.push('/')
   }
 
   useEffect(() => {

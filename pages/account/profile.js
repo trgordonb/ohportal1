@@ -2,17 +2,19 @@ import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { useState, useEffect } from 'react'
 import Router from 'next/router'
-import useRequest from '../../hooks/use-request'
+import useRequest from '../../hooks/use-appstate'
 import { useTranslation } from 'react-i18next'
+import { useAppState } from '../../hooks/use-appstate'
 
-export default function ProfilePage({ currentUser }) {
+export default function ProfilePage() {
     const [weight, setWeight] = useState()
     const [height, setHeight] = useState()
     const [dateOfBirth, setDateOfBirth] = useState()
     const [gender, setGender] = useState()
     const { t } = useTranslation('common')
+    const { currentUser, setCurrentUser } = useAppState()
 
-    const { doRequest, errors } = useRequest({
+    /**const { doRequest, errors } = useRequest({
         url: `https://ohbiohealth.xyz/api/profiles/${currentUser?.id}`,
         method: 'put',
         body: {
@@ -25,7 +27,7 @@ export default function ProfilePage({ currentUser }) {
         onSuccess: () => Router.push({
             pathname: '/',
         })
-    });
+    });*/
 
     const handleSelect = (e) => {
         e.preventDefault()
@@ -37,7 +39,12 @@ export default function ProfilePage({ currentUser }) {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        doRequest()
+        //doRequest()
+        setCurrentUser({
+            ...currentUser,
+            hasProvidedInfo: true
+        })
+        Router.push('/')
     }
 
     const intRx = /\d/,
@@ -56,10 +63,10 @@ export default function ProfilePage({ currentUser }) {
     }
 
     useEffect(() => {
-        if (errors) {
-          toast.error(errors)
-        }
-    },[errors])
+        //if (errors) {
+        //  toast.error(errors)
+        //}
+    },[])
   
     return (
         <div className='py-16'>

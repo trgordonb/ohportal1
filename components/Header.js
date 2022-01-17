@@ -6,20 +6,14 @@ import { useTranslation } from 'react-i18next'
 import { useAppState } from '../hooks/use-appstate'
 import { useRouter } from 'next/router'
 
-export default function Header({ currentUser }) {
+export default function Header() {
   const { t, i18n } = useTranslation()  
   const [isOpen, setIsOpen] = useState(false)
-  const [isSignIn, setIsSignIn] = useState(false)
   const [dismissBar, setDismissBar] = useState(false)
-  const { hasDismissedNotification, setHasDismissedNotification } = useAppState()
+  const { hasDismissedNotification, setHasDismissedNotification, currentUser } = useAppState()
   const router = useRouter()
 
   useEffect(() => {
-    if (currentUser) {
-      setIsSignIn(true)
-    } else {
-      setIsSignIn(false)
-    }
     let displayMessage = ''
     if (currentUser && currentUser.usertype === 'client') {
         if (!currentUser.hasProvidedInfo) {
@@ -38,8 +32,8 @@ export default function Header({ currentUser }) {
   },[currentUser])
 
   return (
-      <header className="bg-gradient-to-r from-indigo-500 to-cyan-500 sm:flex sm:justify-between sm:items-center sm:px-4 sm:py-3">
-        { !dismissBar &&
+    <div>
+      { !dismissBar &&
             <div className="mb-0 p-2 text-white bg-gray-800 text-center">
                 <p>              
                     <span>
@@ -53,7 +47,7 @@ export default function Header({ currentUser }) {
                         currentUser && currentUser.hasBoughtDevice && currentUser.hasRegDevice && !currentUser.hasFinishedSurvey && <>{t('talkchatbot')}</>
                     }
                         <button 
-                            className="ml-10" 
+                            className="ml-10 border-2 border-white p-1" 
                             onClick={() => {
                                 setHasDismissedNotification(true)
                                 setDismissBar(true)
@@ -64,7 +58,8 @@ export default function Header({ currentUser }) {
                     </span>
                 </p>
             </div>
-        }
+      }
+      <header className="bg-gradient-to-r from-indigo-500 to-cyan-500 sm:flex sm:justify-between sm:items-center sm:px-4 sm:py-3">
         <div className="flex items-center justify-between px-4 py-3 sm:p-0">
           <div>
             <button className="" onClick={() => {router.replace('/')}}>
@@ -105,18 +100,19 @@ export default function Header({ currentUser }) {
             <div className="hidden sm:block">
               <DropDown 
                 title={t('account')}
-                items={isSignIn? [t('regdevice'), t('order'), t('signout')]: [t('signin'), t('register')]} 
+                items={currentUser? [t('regdevice'), t('order'), t('signout')]: [t('signin'), t('register')]} 
                 short={false}
-                links={isSignIn? ['/account/regdevice','/account/orders','/account/signout']:['/account/signin','/account/signup']}
+                links={currentUser? ['/account/regdevice','/account/orders','/account/signout']:['/account/signin','/account/signup']}
               />
             </div>
             <DropDownResponsive 
               title={t('account')} 
-              items={isSignIn? [t('regdevice'), t('order'), t('signout')]:[t('signin'), t('register')]}
-              links={isSignIn? ['/account/regdevice','/account/orders','/account/signout']:['/account/signin','/account/signup']}
+              items={currentUser? [t('regdevice'), t('order'), t('signout')]:[t('signin'), t('register')]}
+              links={currentUser? ['/account/regdevice','/account/orders','/account/signout']:['/account/signin','/account/signup']}
             />
           </div>
         </nav>
       </header>
+    </div>
   )
 }

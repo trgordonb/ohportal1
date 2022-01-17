@@ -4,12 +4,15 @@ const AppStateContext = createContext(undefined)
 
 export function AppStateProvider({ children }) {
     const [hasDismissedNotification, setHasDismissedNotification] = useState(false)
+    const [currentUser, setCurrentUser] = useState(null)
 
     return (
         <AppStateContext.Provider
             value={{
                 hasDismissedNotification,
-                setHasDismissedNotification
+                setHasDismissedNotification,
+                currentUser,
+                setCurrentUser
             }}
         >
             {children}
