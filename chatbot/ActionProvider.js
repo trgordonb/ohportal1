@@ -45,8 +45,10 @@ class ActionProvider {
         const message = this.createChatbotMessage(this.stateRef.t('q4'), { withAvatar: false, delay: 500, widget: "yesno" });
         this.setChatbotMessage(message, { burningsensation: true });
       } else if (this.stateRef.step === 4) {
-        const message = this.createChatbotMessage(this.stateRef.t('q5'));
-        this.setChatbotMessage(message, { numbsensation: true });
+        const message1 = this.createChatbotMessage(this.stateRef.t('p1'), { withAvatar: false, delay: 500, widget: 'bodydiagram'})
+        this.setChatbotMessage(message1, { numbsensation: true });
+        const message2 = this.createChatbotMessage(this.stateRef.t('p2'))
+        this.setChatbotMessage(message2, {})
       }
     }
 
@@ -63,11 +65,27 @@ class ActionProvider {
         const message = this.createChatbotMessage(this.stateRef.t('q4'), { withAvatar: false, delay: 500, widget: "yesno" });
         this.setChatbotMessage(message, { burningsensation: false });
       } else if (this.stateRef.step === 4) {
-        const message = this.createChatbotMessage(this.stateRef.t('q5'));
-        this.setChatbotMessage(message, { numbsensation: false });
-      }
+        const message1 = this.createChatbotMessage(this.stateRef.t('p1'), { withAvatar: false, delay: 500, widget: 'bodydiagram'})
+        this.setChatbotMessage(message1, { numbsensation: false });
+        const message2 = this.createChatbotMessage(this.stateRef.t('p2'))
+        this.setChatbotMessage(message2, {})
+      } 
     }
 
+    handleGoodbye = () => {
+      const message = this.createChatbotMessage(this.stateRef.t('q5'))
+      this.setChatbotMessage(message, {})
+    }
+
+    handleBadInput = () => {
+      const message = this.createChatbotMessage(this.stateRef.t('e1'))
+      this.setChatbotMessage(message, {})
+    }
+
+    handleInvalidInput = () => {
+      const message = this.createChatbotMessage(this.stateRef.t('e2'))
+      this.setChatbotMessage(message, {})
+    }
 }
   
 export default ActionProvider;

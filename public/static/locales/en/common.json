@@ -59,12 +59,18 @@
     "q2": "Do your pain feel like being picked by a needle?",
     "q3": "Do you pain bring a sensation like burning?",
     "q4": "Do your pain bring a sensation of numbness?",
-    "q5": "Thanks for letting us know more about your pain situation. Do you have more to share?",
+    "q5": "Thanks for your time",
+    "e1": "Don't understand what you mean. Try again?",
+    "e2": "Some values in the input are invalid, please try again",
+    "p1": "Please choose from the accompanying body digram your pain points",
+    "p2": "If you have more than one pain points, type in like this example: 1,4,5",
     "y": "Yes",
     "n": "No",
     "assistant": "Assistant",
     "enterresponse": "Enter your response here",
     "support": "Support",
     "pain1": "AI Pain Analysis",
-    "pain2": "Artificial Intelligence Pain analysis system"
+    "pain2": "Artificial Intelligence Pain analysis system",
+    "getstart": "Get Started",
+    "learn": "Learn More"
 }

@@ -179,14 +179,14 @@ export default function HomePage({ data }) {
                         href="/#chatbot"
                         className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-bold rounded-md text-white bg-gray-700 hover:bg-indigo-700"
                       >
-                        Get started
+                        {t('getstart')}
                       </a>
                     <div className="ml-3 inline-flex rounded-md shadow">
                       <a
                         href="/#chatbot"
                         className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-bold rounded-md text-indigo-600 bg-white hover:bg-indigo-50"
                       >
-                        Learn more
+                        {t('learn')}
                       </a>
                     </div>
                     </div>

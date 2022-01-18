@@ -1,5 +1,5 @@
-import { createChatBotMessage } from 'react-chatbot-kit';
 import YesNoOptions from '../components/ChatBotOptions/YesNoOptions';
+import ChatBotBodyDiagram from '../components/ChatBotBodyDiagram/ChatBotBodyDiagram'
 import { nextI18next } from '../utils/i18n'
 
 const config = {  
@@ -41,12 +41,19 @@ const config = {
         needlesensation: false,
         burningsensation: false,
         numbsensation: false,
-        step: 1
+        step: 1,
+        infoBox: '',
+        painpoints: []
     },
     widgets: [
         {
           widgetName: "yesno",
           widgetFunc: (props) => <YesNoOptions {...props} />
+        },
+        {
+          widgetName: "bodydiagram",
+          widgetFunc: (props) => <ChatBotBodyDiagram {...props} />,
+          mapStateToProps: ["infoBox"]
         }
     ]
 };
